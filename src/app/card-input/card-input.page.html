@@ -1,0 +1,97 @@
+<ion-header class="ion-no-border ion-no-shadow" translucent="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size-xl="6" offset-xl="3" color="primary ion-no-padding">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button color="light" defaultHref="cards"></ion-back-button>
+          </ion-buttons>
+          <ion-title color="light" class="ion-no-padding">PAYMENT DETAILS</ion-title>
+        </ion-toolbar>
+      </ion-col>
+    </ion-row>
+    <ion-row class="absolute">
+      <ion-col size-xl="6" offset-xl="3" color="primary">
+        <ion-img [src]="creditCard" class="float-img"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding content-container">
+    <form [formGroup]="creditCardForm">
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+            <ion-item lines="none">
+                <ion-label position="stacked" class="float-left" color="primary"><strong>Card Number</strong></ion-label>
+                <ion-input
+                    type="number"
+                    formControlName="cardHolderName"
+                    autocapitalize=words
+                    class="uppercase ion-shadow"
+                    clearInput
+                    placeholder="1234 8738 9178 0937"
+                ></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+            <ion-item lines="none">
+                <ion-label position="stacked" class="float-left" color="primary"><strong>Name On Card</strong></ion-label>
+                <ion-input
+                    type="text"
+                    formControlName="cardHolderName"
+                    autocapitalize=words
+                    class="uppercase"
+                    clearInput
+                    placeholder="Robins Joel J."
+                ></ion-input>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="6">
+              <ion-item lines="none">
+                  <ion-label position="stacked" class="float-left" color="primary"><strong>Expiry Date</strong></ion-label>
+                  <ion-input
+                      type="text"
+                      formControlName="cardHolderName"
+                      autocapitalize=words
+                      class="uppercase"
+                      clearInput
+                      placeholder="08/20"
+                  ></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col size="6">
+              <ion-item lines="none">
+                  <ion-label position="stacked" class="float-left" color="primary"><strong>Security Code</strong></ion-label>
+                  <ion-input
+                      type="text"
+                      formControlName="cardHolderName"
+                      autocapitalize=words
+                      class="uppercase"
+                      clearInput
+                      placeholder="CVV"
+                  ></ion-input>
+              </ion-item>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-item lines="none">
+            <ion-checkbox color="primary"></ion-checkbox>
+            <ion-label class="ion-padding-horizontal" color="primary">Remember Card</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3" class="ion-padding-horizontal">
+          <ion-button shape="round" expand="full">pay now</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

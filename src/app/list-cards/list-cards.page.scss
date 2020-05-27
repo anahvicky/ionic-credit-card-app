@@ -1,0 +1,41 @@
+:host{
+    background-image: url('../../assets/images/bg2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* Transparent standard */
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    --border-width: 0 !important;
+}
+
+ion-content{
+    --background: transparent !important;
+}
+
+.margin{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card-container{
+    transform: translate3d(0, 70px, 0);
+}
+
+ion-card-content{
+    h3{
+        font-weight: 700;
+    }
+}
+
+ion-thumbnail{
+    align-items: center !important;
+    display: flex;
+
+    img{
+        height: 35px;
+    }
+}
