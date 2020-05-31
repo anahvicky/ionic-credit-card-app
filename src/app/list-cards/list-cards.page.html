@@ -4,7 +4,13 @@
       <ion-col size-xl="6" offset-xl="3" color="primary ion-no-padding">
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button color="primary" defaultHref="input"></ion-back-button>
+            <ion-back-button color="light" defaultHref="input"></ion-back-button>
+          </ion-buttons>
+          <ion-title color="light" class="ion-no-padding text-sm">Manage Cards</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="inputCard()" shape="round" color="primary" class="ion-float-right text-primary bold">
+              <ion-icon name="add-outline" class="bold"></ion-icon> New card
+            </ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-col>
@@ -13,72 +19,29 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-  <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
-    <ion-fab-button color="light" (click)="inputCard()">
-      <ion-icon name="add" color="primary"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
   <ion-grid>
     <ion-row>
       <ion-col size-xl="6" offset-xl="3" class="margin">
-        <ion-title color="light" class="ion-no-padding">Manage Your Cards</ion-title>
         <ion-text class="ion-no-padding" color="primary">All transactions are encrypted</ion-text>
       </ion-col>
     </ion-row>
     <div class="card-container">
-      <ion-row>
+      <ion-row *ngFor="let card of listCards">
         <ion-col>
           <ion-card>
             <ion-card-content class="ion-no-padding">
               <ion-item lines="none" class="">
                 <ion-thumbnail slot="start">
-                  <img [src]="visa">
+                  <img *ngIf="card.type === 'visacard'" [src]="visa">
+                  <img *ngIf="card.type === 'mastercard'" [src]="master">
+                  <img *ngIf="card.type === 'vervecard'" [src]="verve">
+                  <img *ngIf="card.type === 'others'" [src]="others">
                 </ion-thumbnail>
                 <ion-label>
-                  <h3>1235 5893 8478 9023 </h3>
-                  <p>JOEL JEFFERY J.</p>
+                  <h3>{{ card.number }}</h3>
+                  <p>{{ card.name | titlecase }}</p>
                 </ion-label>
-                <ion-buttons>
-                  <ion-icon name="trash-outline" color="primary"></ion-icon>
-                </ion-buttons>
-              </ion-item>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-card>
-            <ion-card-content class="ion-no-padding">
-              <ion-item lines="none" class="">
-                <ion-thumbnail slot="start">
-                  <img [src]="master">
-                </ion-thumbnail>
-                <ion-label>
-                  <h3>1235 5893 8478 9023 </h3>
-                  <p>JOEL JEFFERY J.</p>
-                </ion-label>
-                <ion-buttons>
-                  <ion-icon name="trash-outline" color="primary"></ion-icon>
-                </ion-buttons>
-              </ion-item>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-card>
-            <ion-card-content class="ion-no-padding">
-              <ion-item lines="none" class="">
-                <ion-thumbnail slot="start">
-                  <img [src]="verve">
-                </ion-thumbnail>
-                <ion-label>
-                  <h3>1235 5893 8478 9023 </h3>
-                  <p>JOEL JEFFERY J.</p>
-                </ion-label>
-                <ion-buttons>
+                <ion-buttons (click)="removeCard(card.id)">
                   <ion-icon name="trash-outline" color="primary"></ion-icon>
                 </ion-buttons>
               </ion-item>

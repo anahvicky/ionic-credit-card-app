@@ -51,6 +51,10 @@ ion-toolbar {
     border: 1px solid
 }
 
+.border-bottom{
+    border-bottom: 1px solid red !important;
+}
+
 ion-content{
     --background: transparent;
 }

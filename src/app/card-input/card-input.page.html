@@ -19,18 +19,20 @@
         <ion-img [src]="creditCard" class="float-img"></ion-img>
       </ion-col>
     </ion-row>
-    <form [formGroup]="creditCardForm">
+    <form [formGroup]="creditCardForm" #formDirective="ngForm">
       <ion-row>
         <ion-col size-xl="6" offset-xl="3">
             <ion-item lines="none">
                 <ion-label position="stacked" class="float-left" color="primary"><strong>Card Number</strong></ion-label>
                 <ion-input
-                    type="number"
-                    formControlName="cardHolderName"
+                    type="text"
+                    formControlName="cardNumber"
                     autocapitalize=words
-                    class="uppercase ion-shadow"
+                    class="uppercase ion-shadow border-bottom"
                     clearInput
-                    placeholder="1234 8738 9178 0937"
+                    placeholder="3425 1234 5678 0987"
+                    (ionChange)="checkCardNumber($event)"
+                    [class.border-bottom]="!cardValidator.cardNumber"
                 ></ion-input>
             </ion-item>
         </ion-col>
@@ -56,11 +58,12 @@
                   <ion-label position="stacked" class="float-left" color="primary"><strong>Expiry Date</strong></ion-label>
                   <ion-input
                       type="text"
-                      formControlName="cardHolderName"
-                      autocapitalize=words
+                      formControlName="ccExp"
                       class="uppercase"
                       clearInput
                       placeholder="08/20"
+                      (ionChange)="checkCardExpDate($event)"
+                      [class.border-bottom]="!cardValidator.expDate"
                   ></ion-input>
               </ion-item>
           </ion-col>
@@ -68,12 +71,14 @@
               <ion-item lines="none">
                   <ion-label position="stacked" class="float-left" color="primary"><strong>Security Code</strong></ion-label>
                   <ion-input
-                      type="text"
-                      formControlName="cardHolderName"
+                      type="number"
+                      formControlName="cardCVV"
                       autocapitalize=words
                       class="uppercase"
                       clearInput
                       placeholder="CVV"
+                      (ionChange)="checkcvv($event)"
+                      [class.border-bottom]="!cardValidator.cVV"
                   ></ion-input>
               </ion-item>
           </ion-col>
@@ -81,14 +86,16 @@
       <ion-row>
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
-            <ion-checkbox color="primary"></ion-checkbox>
+            <ion-checkbox color="primary" formControlName="isToRemember"></ion-checkbox>
             <ion-label class="ion-padding-horizontal" color="primary">Remember Card</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size-xl="6" offset-xl="3" class="ion-padding-horizontal">
-          <ion-button shape="round" expand="full">pay now</ion-button>
+          <ion-button (click)="onSubmitCard(formDirective)" shape="round" expand="full"
+          [disabled]="!creditCardForm.valid || !cardValidator.cardNumber || !cardValidator.cVV || !cardValidator.expDate"
+          >pay now</ion-button>
         </ion-col>
       </ion-row>
     </form>

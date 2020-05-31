@@ -16,13 +16,25 @@ ion-content{
     --background: transparent !important;
 }
 
+.text-sm{
+    font-size: 17px;
+}
+
+.text-primary{
+    color: var(--ion-color-secondary) !important;
+}
+
+.bold{ 
+    font-weight: 700;
+}
+
 .margin{
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .card-container{
-    transform: translate3d(0, 70px, 0);
+    transform: translate3d(0, 40px, 0);
 }
 
 ion-card-content{
