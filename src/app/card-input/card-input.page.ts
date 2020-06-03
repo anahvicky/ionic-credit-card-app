@@ -107,8 +107,8 @@ export class CardInputPage implements OnInit {
   checkCardExpDate(ev) {
     const expDate = ev.detail.value;
 
-    const v = expDate.replace(/\s+/g, '');
-    const matches = v.match(/\d{4}/g);
+    const v = expDate.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    const matches = v.match(/\d{2,4}/g);
     const match = (matches && matches[0]) || '';
     const parts = [];
     for (let i = 0, len = match.length; i < len; i += 2) {
@@ -137,9 +137,24 @@ export class CardInputPage implements OnInit {
   // check for card cvv input
   checkcvv(ev) {
     const cvv = ev.detail.value;
-    const v = cvv.replace(/\s+/g, '');
+    const v = cvv.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    const num = v.match(/\d{4}/g) || v.match(/\d{3}/g);
+    const match = (num && num[0]) || '';
+    const parts = [];
+    for (let i = 0, len = match.length; i < len; i += 3) {
+      parts.push(match.substring(i, i + 3));
+    }
 
-    if (!payform.validateCardCVC(v) && v !== ''){
+    if (parts.length > 1) {
+      const cvv4Val = parts.join('');
+      this.creditCardForm.controls.cardCVV.setValue(cvv4Val);
+    } else {
+      this.creditCardForm.controls.cardCVV.setValue(cvv);
+    }
+
+    const cvvForm = this.creditCardForm.value.cardCVV;
+
+    if (!payform.validateCardCVC(cvvForm) && cvvForm !== ''){
       this.cardValidator.cVV = false;
     }else {
       this.cardValidator.cVV = true;

@@ -4,12 +4,12 @@
       <ion-col size-xl="6" offset-xl="3" color="primary ion-no-padding">
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button color="light" defaultHref="input"></ion-back-button>
+            <ion-back-button color="primary" defaultHref="input"></ion-back-button>
           </ion-buttons>
           <ion-title color="light" class="ion-no-padding text-sm">Manage Cards</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="inputCard()" shape="round" color="primary" class="ion-float-right text-primary bold">
-              <ion-icon name="add-outline" class="bold"></ion-icon> New card
+          <ion-buttons slot="end" *ngIf="listCards.length > 0">
+            <ion-button class="ion-float-right bold" color="light" fill="clear">
+              <ion-icon name="ellipsis-vertical-outline" slot="icon-only"></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
@@ -20,12 +20,12 @@
 
 <ion-content fullscreen="true">
   <ion-grid>
-    <ion-row>
-      <ion-col size-xl="6" offset-xl="3" class="margin">
-        <ion-text class="ion-no-padding" color="primary">All transactions are encrypted</ion-text>
-      </ion-col>
-    </ion-row>
-    <div class="card-container">
+    <div class="card-container" *ngIf="listCards.length > 0">
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3" class="margin">
+          <ion-text color="light">All transactions are 100% encrypted</ion-text>
+        </ion-col>
+      </ion-row>
       <ion-row *ngFor="let card of listCards">
         <ion-col>
           <ion-card>
@@ -45,6 +45,27 @@
                   <ion-icon name="trash-outline" color="primary"></ion-icon>
                 </ion-buttons>
               </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-vertical">
+        <ion-col class="ion-padding-vertical">
+          <ion-button shape="round" expand="full" color="secondary" (click)="inputCard()" class="bold">ADD CARD</ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="no-card" *ngIf="listCards.length < 1">
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-header>
+              <ion-img [src]="noCard"></ion-img>
+            </ion-card-header>
+            <ion-card-content class="ion-no-padding ion-justify-content-center text-center">
+              <h3 class="text-center">Add funds now to start paying seamelessly using the app.</h3>
+              <ion-label>Link your bank's Debit/Credit Card to your account to make payment with ease.</ion-label>
+              <ion-button shape="round" color="secondary" (click)="inputCard()">ADD CARD</ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>

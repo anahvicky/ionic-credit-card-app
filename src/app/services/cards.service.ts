@@ -26,6 +26,7 @@ export class CardsService {
       name: 'joel jeffery'
     }
   ]);
+  // cardsData = new BehaviorSubject([]);
   constructor() { }
 
   get cards() {
