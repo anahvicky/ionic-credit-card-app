@@ -30,6 +30,7 @@
                     autocapitalize=words
                     class="uppercase ion-shadow border-bottom"
                     clearInput
+                    id="creditNum"
                     placeholder="3425 1234 5678 0987"
                     (ionChange)="checkCardNumber($event)"
                     [class.border-bottom]="!cardValidator.cardNumber"
@@ -62,6 +63,7 @@
                       class="uppercase"
                       clearInput
                       placeholder="08/20"
+                      id="expDate"
                       (ionChange)="checkCardExpDate($event)"
                       [class.border-bottom]="!cardValidator.expDate"
                   ></ion-input>

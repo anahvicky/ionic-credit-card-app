@@ -14,57 +14,65 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-  <ion-grid>
-    <div class="card-container" *ngIf="listCards.length > 0">
+  <ion-grid class="ion-no-padding">
+    <div class="card-container">
+      <div class="enter-card">
+        <ion-row>
+          <ion-col size-xl="6" offset-xl="3" class="margin">
+            <ion-text color="dark">All transactions are 100% encrypted</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-no-padding">
+          <ion-col class="ion-padding-vertical" size-xl="6" offset-xl="3">
+            <ion-button shape="round" expand="full" (click)="inputCard()" class="bold">ENTER CARD DETAILS</ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
       <ion-row>
-        <ion-col size-xl="6" offset-xl="3" class="margin">
-          <ion-text color="secondary">All transactions are 100% encrypted</ion-text>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-title class="ion-no-padding previous-card" color="dark">Previous Cards</ion-title>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let card of listCards">
-        <ion-col>
-          <ion-card>
-            <ion-card-content class="ion-no-padding">
-              <ion-item lines="none" class="">
-                <ion-thumbnail slot="start">
-                  <img *ngIf="card.type === 'visacard'" [src]="visa">
-                  <img *ngIf="card.type === 'mastercard'" [src]="master">
-                  <img *ngIf="card.type === 'vervecard'" [src]="verve">
-                  <img *ngIf="card.type === 'others'" [src]="others">
-                </ion-thumbnail>
-                <ion-label>
-                  <h3>{{ card.number }}</h3>
-                  <p>{{ card.name | titlecase }}</p>
-                </ion-label>
-                <ion-buttons (click)="removeCard(card.id)">
-                  <ion-icon name="trash-outline" color="primary"></ion-icon>
-                </ion-buttons>
-              </ion-item>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-padding-vertical">
-        <ion-col class="ion-padding-vertical">
-          <ion-button shape="round" expand="full" color="secondary" (click)="inputCard()" class="bold">ADD CARD</ion-button>
-        </ion-col>
-      </ion-row>
-    </div>
-    <div class="no-card" *ngIf="listCards.length < 1">
-      <ion-row>
-        <ion-col>
-          <ion-card>
-            <ion-card-header>
-              <ion-img [src]="noCard"></ion-img>
-            </ion-card-header>
-            <ion-card-content class="ion-no-padding ion-justify-content-center text-center">
-              <h3 class="text-center">Add funds now to start paying seamelessly using the app.</h3>
-              <ion-label>Link your bank's Debit/Credit Card to your account to make payment with ease.</ion-label>
-              <ion-button shape="round" color="secondary" (click)="inputCard()">ADD CARD</ion-button>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+      <div class="list-cards" *ngIf="listCards.length > 0">
+        <ion-row *ngFor="let card of listCards">
+          <ion-col size-xl="6" offset-xl="3">
+            <ion-card>
+              <ion-card-content class="ion-no-padding">
+                <ion-item lines="none" class="">
+                  <ion-thumbnail slot="start">
+                    <img *ngIf="card.type === 'visacard'" [src]="visa">
+                    <img *ngIf="card.type === 'mastercard'" [src]="master">
+                    <img *ngIf="card.type === 'vervecard'" [src]="verve">
+                    <img *ngIf="card.type === 'others'" [src]="others">
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h3>{{ card.number }}</h3>
+                    <p>{{ card.name | titlecase }}</p>
+                  </ion-label>
+                  <ion-buttons (click)="removeCard(card.id)">
+                    <ion-icon name="trash-outline" color="primary"></ion-icon>
+                  </ion-buttons>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="no-card" *ngIf="listCards.length < 1">
+        <ion-row>
+          <ion-col size-xl="6" offset-xl="3">
+            <ion-card>
+              <ion-card-header>
+                <ion-img [src]="noCard"></ion-img>
+              </ion-card-header>
+              <ion-card-content class="ion-no-padding ion-justify-content-center text-center">
+                <h3 class="text-center">No Previous Cards.</h3>
+                <ion-label>Link your bank's Debit/Credit Card to your account to make payment with ease.</ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
     </div>
   </ion-grid>
 </ion-content>

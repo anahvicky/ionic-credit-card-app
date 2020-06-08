@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective } from '@angular/forms';
 import { CardsService } from '../services/cards.service';
 import * as payform from 'payform';
+import Cleave from 'cleave.js';
 
 @Component({
   selector: 'app-card-input',
@@ -47,13 +48,15 @@ export class CardInputPage implements OnInit {
         updateOn: 'change'
       })
     });
-  }
 
-  initFormCheck() {
-    this.cardValidator.cVV = true;
-    this.cardValidator.cardName = true;
-    this.cardValidator.cardNumber = true;
-    this.cardValidator.expDate = true;
+    const cardNum = new Cleave('#creditNum', {
+        creditCard: true,
+    });
+
+    const cleave = new Cleave('#expDate', {
+      date: true,
+      datePattern: ['m', 'y']
+    });
   }
 
   async handleScroll(event) {
@@ -85,42 +88,12 @@ export class CardInputPage implements OnInit {
     }else {
       this.cardValidator.cardNumber = true;
     }
-
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    const matches = v.match(/\d{4,16}/g);
-    const match = (matches && matches[0]) || '';
-    const parts = [];
-    for (let i = 0, len = match.length; i < len; i += 4) {
-      parts.push(match.substring(i, i + 4));
-    }
-
-    if (parts.length > 0) {
-      const maskedNum = parts.join(' ');
-      this.creditCardForm.controls.cardNumber.setValue(maskedNum);
-    } else {
-      this.creditCardForm.value.cardNumber = value;
-    }
   }
 
 
   // Check for Card Expiration Date Input
   checkCardExpDate(ev) {
     const expDate = ev.detail.value;
-
-    const v = expDate.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    const matches = v.match(/\d{2,4}/g);
-    const match = (matches && matches[0]) || '';
-    const parts = [];
-    for (let i = 0, len = match.length; i < len; i += 2) {
-      parts.push(match.substring(i, i + 2));
-    }
-
-    if (parts.length > 0) {
-      const maskedExpDate = parts.join('/');
-      this.creditCardForm.controls.ccExp.setValue(maskedExpDate);
-    } else {
-      this.creditCardForm.controls.ccExp.setValue(expDate);
-    }
 
     if (expDate.length > 2) {
       const expValue = this.creditCardForm.value.ccExp;
@@ -141,6 +114,7 @@ export class CardInputPage implements OnInit {
     const num = v.match(/\d{4}/g) || v.match(/\d{3}/g);
     const match = (num && num[0]) || '';
     const parts = [];
+
     for (let i = 0, len = match.length; i < len; i += 3) {
       parts.push(match.substring(i, i + 3));
     }
