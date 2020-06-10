@@ -1,3 +1,7 @@
+:host{
+    // background: linear-gradient(275deg, rgba(254,142,4,0) 30%, rgba(238,238,238,0.8267682072829132) 72%);
+    background-color: rgba(238,238,238,0.8267682072829132);
+}
 ion-content{
     --background: transparent !important;
 }
@@ -44,6 +48,7 @@ ion-content{
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     padding:.2rem .7rem;
+    overflow: scroll;
 }
 
 .no-card{

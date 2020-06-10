@@ -24,7 +24,12 @@
         </ion-row>
         <ion-row class="ion-no-padding">
           <ion-col class="ion-padding-vertical" size-xl="6" offset-xl="3">
-            <ion-button shape="round" expand="full" (click)="inputCard()" class="bold">ENTER CARD DETAILS</ion-button>
+            <ion-list class="ion-no-padding">
+              <ion-item lines="full" [routerLink]="['/','input']" button detail>
+                <ion-icon name="card-outline"></ion-icon>
+                <ion-label class="ion-padding-horizontal">Enter Card Details</ion-label>
+              </ion-item>
+            </ion-list>
           </ion-col>
         </ion-row>
       </div>

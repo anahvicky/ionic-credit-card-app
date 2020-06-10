@@ -13,6 +13,8 @@ export class ListCardsPage implements OnInit {
   protected verve = '../../assets/images/verve.png';
   protected others = '../../assets/images/verve.png';
   protected noCard = '../../assets/images/credit_card.png';
+  protected card = '../../assets/images/other-cards.png';
+
   protected isCardLoading = true;
   protected listCards: any;
 
